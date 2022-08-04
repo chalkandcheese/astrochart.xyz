@@ -24,7 +24,7 @@ import Views.Chart.Explanations (Explicable(explanationAttribute, explain), gene
 renderText :: a -> BirthData -> UTCTime -> TransitData -> Text
 renderText _ BirthData {..} transitMoment TransitData {..} =
   execWriter $ do
-    ln_ "Freenatalchart.xyz"
+    ln_ "astrochart.xyz"
     ln_ "=================="
     ln_ "Transits for:"
     ln_ . pack $ transitMoment & formatUTCTimestamp
@@ -32,7 +32,7 @@ renderText _ BirthData {..} transitMoment TransitData {..} =
     ln_ ""
     ln_ "Natal Planet Positions"
     ln_ "----------------------"
-    ln_ . heading $ 
+    ln_ . heading $
       [
         justifyPlanetPos "Planet", justifyHouseNum "House",
         justifyLongitude "Longitude", justifyDouble "Speed",
@@ -60,7 +60,7 @@ renderText _ BirthData {..} transitMoment TransitData {..} =
     ln_ ""
     ln_ "Transiting Planet Positions"
     ln_ "---------------------------"
-    ln_ . heading $ 
+    ln_ . heading $
       [
         justifyPlanetPos "Planet", justifyHouseNum "House",
         justifyLongitude "Longitude", justifyDouble "Speed",
@@ -96,7 +96,7 @@ renderText _ BirthData {..} transitMoment TransitData {..} =
     transitActivity "to Natal Axes" transitMoment angleTransits
 
 aspectsHeading :: Text
-aspectsHeading = 
+aspectsHeading =
   heading [
       justifyAspecting "Aspecting", justifyAspect "Aspect"
     , justifyAspected "Aspected", justifyDouble "Angle"
@@ -197,7 +197,7 @@ render renderCtx bd@BirthData {..} transitMoment t@TransitData{..} = do
               summary_ [class_ "accordion-header"] $ do
                 headerIcon
                 sectionHeading $ do
-                  "Natal Planet Positions"      
+                  "Natal Planet Positions"
               div_ [class_ "accordion-body scrollable-container"] $ do
                 planetPositionsTable natalPlanetPositions natalHouses
 
@@ -206,7 +206,7 @@ render renderCtx bd@BirthData {..} transitMoment t@TransitData{..} = do
               summary_ [class_ "accordion-header"] $ do
                 headerIcon
                 sectionHeading $ do
-                  "Transiting Planet Positions"      
+                  "Transiting Planet Positions"
               div_ [class_ "accordion-body scrollable-container"] $ do
                 planetPositionsTable transitingPlanetPositions natalHouses
           section_ [class_ "section"] $ do
@@ -224,7 +224,7 @@ render renderCtx bd@BirthData {..} transitMoment t@TransitData{..} = do
                 headerIcon
                 sectionHeading "Transits"
               div_ [] $ do
-                generalTransitsExplanation 
+                generalTransitsExplanation
                 h4_ "Orbs we use"
                 p_ "All aspects you see in the summary table are calculated using the following orbs: "
                 orbsTable aspectsForTransits
@@ -275,7 +275,7 @@ transitAspectDetailsTable  transitingPlanets planetTransits angleTransits =
 
         td_ [style_ "border: 1px solid", class_ "text-small"] $ do
           planetaryAspectCell $ findAspectWithAngle (transitAspects angleTransits) transitingPlanet I
-  
+
         td_ [style_ "border: 1px solid", class_ "text-small"] $ do
           planetaryAspectCell $ findAspectWithAngle (transitAspects angleTransits) transitingPlanet X
 
@@ -289,7 +289,7 @@ transitSummaries activity =
           " "
           activeTransit & aspect & aspectName & asIcon
           " "
-          activityData & transited & asIcon'   
+          activityData & transited & asIcon'
           " "
         span_ [] $ do
           activityData & transiting & labelText & toHtml
@@ -331,7 +331,7 @@ transitCards activity =
               toHtml . pack . show $ aspectPhase activeTransit
               ")"
             p_ [class_ "text-small"] $ do
-              a_ [href_ "#active-transit-list"] "Back to list"              
+              a_ [href_ "#active-transit-list"] "Back to list"
       div_ [class_ "card-body"] $ do
 
 
@@ -360,7 +360,7 @@ transitCards activity =
               span_ [class_ "text-medium"] $ do
                 maybe mempty localDate_ (activityData & transitStarts)
           else
-            mempty 
+            mempty
 
           if (activityData & transitEnds & isJust) then
             div_ [class_ "flex-item"] $ do
@@ -373,7 +373,7 @@ transitCards activity =
                 maybe mempty localDate_ (activityData & transitEnds)
           else
             mempty
-        
+
         if (activityData & immediateTriggers & null & not) then
           div_ [class_ "flex-container"] $ do
             div_ [class_ "flex-item"] $ do
@@ -407,17 +407,17 @@ bodyDetails extraLabel body =
       " "
       toHtml $ labelText body
     td_ [] $ do
-      zodiacLink body 
+      zodiacLink body
 
 localTime_ :: UTCTime -> Html ()
-localTime_ moment = 
+localTime_ moment =
   time_ [class_ "local-datetime", datetime_ $ moment & iso8601Show & pack] $ do
-    toHtml $ moment & formatTime defaultTimeLocale rfc822DateFormat 
+    toHtml $ moment & formatTime defaultTimeLocale rfc822DateFormat
 
 localDate_ :: UTCTime -> Html ()
-localDate_ moment = 
+localDate_ moment =
   time_ [class_ "local-date", datetime_ $ moment & iso8601Show & pack] $ do
-    toHtml $ moment & formatTime defaultTimeLocale "%a, %_d %b %Y" 
+    toHtml $ moment & formatTime defaultTimeLocale "%a, %_d %b %Y"
 
 asIcon' :: HasLabel a => a -> Html ()
 asIcon' z =
@@ -431,7 +431,7 @@ asIcon' z =
         "MC" -> "MC"
         "Asc" -> "Asc"
         _ -> ""
-    shown  = 
+    shown  =
       case label' of
         "Mean Node" -> "MeanNode"
         "Lilith" -> "MeanApog"

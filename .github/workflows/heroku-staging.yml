@@ -15,17 +15,17 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run:
         heroku container:login
-    - name: Build with nix and load into docker 
-      run: 
+    - name: Build with nix and load into docker
+      run:
         docker load < $(nix-build ./nix/docker.nix)
     - name: Push to container Registry
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        docker tag freenatalchart:latest registry.heroku.com/freenatalchart-staging/web
-        docker push registry.heroku.com/freenatalchart-staging/web
+        docker tag astrochart:latest registry.heroku.com/astrochart-staging/web
+        docker push registry.heroku.com/astrochart-staging/web
     - name:  Release
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run:
-        heroku container:release web -a freenatalchart-staging
+        heroku container:release web -a astrochart-staging

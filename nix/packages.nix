@@ -15,7 +15,7 @@ let
           overrides = self: super: (
             (extra-deps super) // {
               # automatically create a derivation based on the cabal file present in ../.
-              freenatalchart = (super.callCabal2nix "freenatalchart" (gitignoreSource ../.) {});
+              astrochart = (super.callCabal2nix "astrochart" (gitignoreSource ../.) {});
             }
           );
         };
