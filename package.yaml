@@ -1,6 +1,6 @@
-name:                freenatalchart
+name:                astrochart
 version:             0.2.0.0
-github:              lfborjas/freenatalchart
+github:              tboye/astrochart
 license:             GPL-2
 author:              Luis Borjas Reyes
 
@@ -15,7 +15,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on Github at <https://github.com/lfborjas/freenatalchart#readme>
+description:         Please see the README on Github at <https://github.com/tboye/astrochart#readme>
 
 dependencies:
 - base >= 4.11 && < 10
@@ -62,11 +62,11 @@ library:
   source-dirs: src
 
 executables:
-  freenatalchart-exe:
+  astrochart-exe:
     main:                Main.hs
     source-dirs:         app
     dependencies:
-    - freenatalchart
+    - astrochart
     - optparse-simple
 
     ghc-options:
@@ -75,11 +75,11 @@ executables:
     - -with-rtsopts=-N
 
 tests:
-  freenatalchart-test:
+  astrochart-test:
     main:                Spec.hs
     source-dirs:         test
     dependencies:
-    - freenatalchart
+    - astrochart
     - hspec
     - hspec-wai
     - hspec-wai-json

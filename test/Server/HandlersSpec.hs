@@ -41,7 +41,7 @@ bodyContains substr = MatchBody (\_ actual -> bodyMatcher actual substr)
     bodyMatcher :: Body -> String -> Maybe String
     bodyMatcher actual sub = do
       case safeToString . toStrict $ actual of
-         Just responseBody -> do 
+         Just responseBody -> do
            if (sub `isInfixOf` responseBody) then
              Nothing
            else
@@ -75,7 +75,7 @@ prodApp :: IO Application
 prodApp = testApp' Production
 
 expectedHeaders :: [MatchHeader]
-expectedHeaders = 
+expectedHeaders =
   [
     "Content-Type" <:> "text/html;charset=utf-8",
     "Cache-Control" <:> "public, max-age=86400, stale-while-revalidate=3600",
@@ -83,7 +83,7 @@ expectedHeaders =
   ]
 
 testHost :: ByteString
-testHost = "test.freenatalchart.xyz"
+testHost = "test.astrochart.xyz"
 
 spec :: Spec
 spec = do
@@ -95,7 +95,7 @@ routesSpec =
   with testApp $ do
     describe "GET /" $ do
       it "returns the index page" $ do
-        get "/" `shouldRespondWith` ResponseMatcher 
+        get "/" `shouldRespondWith` ResponseMatcher
           { matchStatus = 200
           , matchHeaders = expectedHeaders
           , matchBody = matchAny
@@ -122,7 +122,7 @@ prodSpec =
         request methodGet "/" [(hHost, testHost)] "" `shouldRespondWith`
           ResponseMatcher
             { matchStatus = 301
-            , matchHeaders = ["Location" <:> "https://test.freenatalchart.xyz"]
+            , matchHeaders = ["Location" <:> "https://test.astrochart.xyz"]
             , matchBody = matchAny
             }
       xit "redirects if requested via http" $ do
@@ -130,9 +130,9 @@ prodSpec =
         req `shouldRespondWith`
           ResponseMatcher
             { matchStatus = 301
-            , matchHeaders = ["Location" <:> "https://test.freenatalchart.xyz"]
+            , matchHeaders = ["Location" <:> "https://test.astrochart.xyz"]
             , matchBody = matchAny
-            }        
+            }
       it "returns a successful response if requested via https" $ do
         request methodGet "/" [(hHost, testHost), ("X-Forwarded-Proto", "https")] "" `shouldRespondWith`
           ResponseMatcher

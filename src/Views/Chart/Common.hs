@@ -184,7 +184,7 @@ zodiacLink' elementColor p =
     pl = getLongitudeRaw p
     split = splitDegreesZodiac pl
     sign = split & longitudeZodiacSign
-    colorClass = 
+    colorClass =
       if elementColor then
         elementClassM sign
       else
@@ -199,7 +199,7 @@ planetLink p =
     toHtml textLabel
   where
     textLabel = p & label & pack
-  
+
 houseLinkFull :: HouseNumber -> Html ()
 houseLinkFull houseNumber =
   a_ [href_ $ "#house-" <> toText houseNumber] $ do
@@ -211,9 +211,9 @@ aspectLink a =
   a_ [href_ $ "#" <> textLabel] $ do
     toHtml textLabel
   where
-    textLabel = a & toText 
+    textLabel = a & toText
 
-housePositionText :: Maybe House -> Text 
+housePositionText :: Maybe House -> Text
 housePositionText Nothing = mempty
 housePositionText (Just House {..}) =
    toText . (+ 1) . fromEnum $ houseNumber
@@ -255,7 +255,7 @@ planetaryAspectCell (Just (a@HoroscopeAspect {..})) =
     phase = aspectPhase a
 
 aspectColorStyle :: Aspect -> Attribute
-aspectColorStyle aspect = 
+aspectColorStyle aspect =
   class_ ("text-" <> (aspectClass . temperament $ aspect))
   where
     aspectClass Analytical = "analytic"
@@ -266,7 +266,7 @@ toText :: Show a => a -> Text
 toText = pack . show
 
 elementClass :: ZodiacSignName -> Text
-elementClass signName = 
+elementClass signName =
   case (zodiacSignElement signName) of
     Nothing -> "text-white"
     Just e -> "text-" <> (toLower . pack . show $ e)
@@ -313,17 +313,17 @@ planetPositionsTable planetPositions houses =
             if isRetrograde pp then
              span_ [class_ "text-light tooltip", data_ "tooltip" "Retrograde"] " (r)"
             else
-              ""  
+              ""
           td_ $ do
-            housePositionHtml $ housePosition houses planetLng 
+            housePositionHtml $ housePosition houses planetLng
           td_ $ do
-            htmlDegreesZodiac planetLng 
+            htmlDegreesZodiac planetLng
           td_ $ do
-            htmlDegrees planetLngSpeed  
+            htmlDegrees planetLngSpeed
           td_ $ do
-            htmlDegreesLatitude planetLat 
+            htmlDegreesLatitude planetLat
           td_ $ do
-            htmlDegreesLatitude $ Latitude planetDeclination  
+            htmlDegreesLatitude $ Latitude planetDeclination
 
 orbsTable :: [Aspect] -> Html ()
 orbsTable aspectList =
@@ -349,20 +349,20 @@ orbsTable aspectList =
 cardDark_ :: Attribute
 cardDark_ = class_ "card card-dark mx-2 my-2 text-center"
 attributeTitle_ :: Html () -> Html ()
-attributeTitle_ = h5_ [class_ "text-light"] 
+attributeTitle_ = h5_ [class_ "text-light"]
 
 navbar_ :: Html ()
 navbar_ =
   header_ [class_ "navbar bg-dark navbar-fixed navbar-fixed-top"] $ do
     section_ [class_ "navbar-section"] $ do
       -- NOTE: there's a bit of JS in date.js that will find this element
-      -- and replace its click event with navigating to transits at the 
+      -- and replace its click event with navigating to transits at the
       -- moment of click. In the absence of JS, it simply refreshes the page.
       a_ [id_ "moment-link", href_ "", class_ "mr-2 d-invisible"] $ do
         i_ [class_ "icon icon-time", title_ "Show transits as of right now"] ""
         span_ [class_ "hide-sm"] " Current Transits"
     section_ [class_ "navbar-section navbar-center navbar-brand"] $ do
-       a_ [href_ "/", class_ "brand-text"] "FreeNatalChart.xyz"
+       a_ [href_ "/", class_ "brand-text"] "astrochart.xyz"
     section_ [class_ "navbar-section"] $ do
       a_ [href_ "#main"] $ do
         span_ [class_ "hide-sm"] "Back to Top "

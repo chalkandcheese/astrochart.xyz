@@ -45,10 +45,10 @@ import RIO.Writer (MonadWriter(tell), execWriter)
 import Ephemeris.Aspect (currentAngle, orb)
 
 renderText :: a -> BirthData -> HoroscopeData -> Text
-renderText _ BirthData {..} HoroscopeData{..}= 
+renderText _ BirthData {..} HoroscopeData{..}=
   -- Writer Text ()
   execWriter $ do
-    ln_ "Freenatalchart.xyz"
+    ln_ "Astrochart.xyz"
     ln_ "=================="
     ln_ ""
     ln_ "Horoscope for:"
@@ -61,7 +61,7 @@ renderText _ BirthData {..} HoroscopeData{..}=
     ln_ ""
     ln_ "Planet Positions"
     ln_ "----------------"
-    ln_ . heading $ 
+    ln_ . heading $
       [
         justifyPlanetPos "Planet", justifyHouseNum "House",
         justifyLongitude "Longitude", justifyDouble "Speed",
@@ -93,7 +93,7 @@ renderText _ BirthData {..} HoroscopeData{..}=
       [
         justifyHouseNum "House", justifyDouble "Cusp", justifyDeclination "Declination",
         "Zodiac Longitude"
-      ] 
+      ]
     forM_ horoscopeHouses $ \hc@House {..} -> do
       tell . justifyHouseNum . housePositionText $ (Just hc)
       tell "|"
@@ -137,7 +137,7 @@ renderText _ BirthData {..} HoroscopeData{..}=
     sunSign = (findSunSign horoscopePlanetPositions)
     moonSign = (findMoonSign horoscopePlanetPositions)
     asc = (findAscendant horoscopeHouses)
-    aspectsHeading = 
+    aspectsHeading =
       heading [
           justifyAspecting "Aspecting", justifyAspect "Aspect"
         , justifyAspected "Aspected", justifyDouble "Angle"
@@ -156,10 +156,10 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
         "svg { height: auto; width: auto}\
         \.flex-container{margin-top: 10px; margin-bottom: 10px;}\
         \"
-  
+
     body_ $ do
       navbar_
-  
+
       div_ [id_ "main", class_ "container grid-xl mx-4"] $ do
         div_ [id_ "chart", class_ "under-navbar"] $ do
           div_ [class_ "blue-stars-bg text-center", style_ "padding-bottom: 9px"] $ do
@@ -184,7 +184,7 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
                 span_ [class_ $ elementClassM asc] $ do
                   maybe mempty asIcon asc
                 " Asc"
-  
+
           figure_ [class_ "figure p-centered my-2", style_ "max-width: 600px;"] $ do
             div_ [] $ do
               -- unfortunately, the underlying library assigns `height` and `width` attributes to the SVG:
@@ -195,7 +195,7 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
               -- and then set the attributes via CSS, since that's allowed (they're Geometry Properties:)
               -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/height#svg
               (toHtmlRaw $ Svg.renderBS $ renderChart [Svg.makeAttribute "height" "not", Svg.makeAttribute "width" "not"] 600 h)
-  
+
           ul_ [class_ "tab tab-block tab-block-dark"] $ do
             li_ [class_ "tab-item active"] $ do
               a_ [href_ "#analyze"] "Analyze"
@@ -203,20 +203,20 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
               a_ [href_ "#understand"] "Understand"
             li_ [class_ "tab-item"] $ do
               a_ [href_ "#introspect"] "Introspect"
-  
+
           div_ [class_ "divider", id_ "analyze"] ""
-  
+
           details_ [id_ "planet-positions", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading $ do
                 "Planet Positions"
-  
+
             div_ [class_ "accordion-body scrollable-container"] $ do
               planetPositionsTable horoscopePlanetPositions horoscopeHouses
-  
+
           div_ [class_ "divider"] ""
-  
+
           details_ [id_ "house-cusps", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header "] $ do
               headerIcon
@@ -224,9 +224,9 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
             div_ [class_ "accordion-body scrollable-container"] $ do
               houseSystemDetails horoscopeSystem
               houseCuspsTable horoscopeHouses
-  
+
           div_ [class_ "divider"] ""
-  
+
           details_ [id_ "aspects-summary", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
@@ -237,103 +237,103 @@ render renderCtx BirthData {..} h@HoroscopeData {..} = do
                 a_ [href_ "#aspects"] "Aspects"
                 " section."
               aspectDetailsTable horoscopePlanetPositions horoscopePlanetaryAspects horoscopeAngleAspects
-  
+
           div_ [class_ "divider", id_ "understand"] ""
-  
+
           details_ [id_ "signs", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "Zodiac Signs"
-            
+
             div_ [] $ do
               generalSignsExplanation
-  
-          divider_ 
+
+          divider_
           details_ [id_ "houses", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "Houses"
             div_ [] $ do
               generalHousesExplanation
-  
-          divider_ 
+
+          divider_
           details_ [id_ "planets", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "Planets"
-  
+
             div_ [] $ do
               generalPlanetsExplanation
-  
+
           divider_
           details_ [id_ "aspects", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "Aspects"
-  
+
             div_ [] $ do
               generalAspectsExplanation
               h4_ "Orbs we use"
               p_ "All aspects you see in this page are calculated using the following orbs:"
               orbsTable defaultAspects
-  
-  
-          divider_ 
+
+
+          divider_
           details_ [id_ "references", class_ "accordion my-2"] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "References"
             div_ [class_ "accordion-body"] $ do
               attribution
-  
+
           div_ [class_ "divider", id_ "introspect"] ""
-          
+
           details_ [id_ "my-zodiac", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "My Zodiac Signs"
-  
-            div_ [] $ do  
+
+            div_ [] $ do
               zodiacCards horoscopePlanetPositions horoscopeHouses
-  
+
           divider_
           details_ [id_ "my-houses", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "My Houses"
-  
+
             div_ [] $ do
               houseCards horoscopePlanetPositions horoscopeHouses
-  
+
           divider_
           details_ [id_ "my-planets", class_ "accordion my-2", open_ ""] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "My Planets"
-  
+
             div_ [] $ do
               planetCards horoscopePlanetPositions horoscopeHouses horoscopePlanetaryAspects horoscopeAngleAspects
-  
+
           divider_
           details_ [id_ "my-major-aspects", class_ "accordion my-2", open_ "" ] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "My Major Aspects"
-  
+
             div_ [] $ do
               forM_ majorAspects $ \a -> do
                 aspectDetails' a
-  
+
           divider_
           details_ [id_ "my-minor-aspects", class_ "accordion my-2", open_ "" ] $ do
             summary_ [class_ "accordion-header"] $ do
               headerIcon
               sectionHeading "My Minor Aspects"
-  
+
             div_ [] $ do
               forM_ minorAspects  $ \a -> do
                 aspectDetails' a
-  
+
       link_ [rel_ "stylesheet", href_ "https://unpkg.com/spectre.css/dist/spectre-icons.min.css"]
       footerNav
       script_ [src_ . pack $ (renderCtx ^. staticRootL) <> "js/date.js"] (""::Text)
@@ -375,7 +375,7 @@ houseCuspsTable houses =
           td_ $ do
             htmlDegreesLatitude $ Latitude houseDeclination
 
-aspectDetailsTable :: [PlanetPosition] -> [PlanetaryAspect] -> [AngleAspect] -> Html () 
+aspectDetailsTable :: [PlanetPosition] -> [PlanetaryAspect] -> [AngleAspect] -> Html ()
 aspectDetailsTable planetPositions planetAspects angleAspects =
   table_ [class_ "table table-scroll"] $ do
     forM_ defaultPlanets $ \rowPlanet -> do
@@ -411,40 +411,40 @@ zodiacCards planetPositions houseCusps =
           h4_ [id_ (toText zodiacSign), class_ $ elementClass zodiacSign] $ do
             asIcon zodiacSign
             " "
-            toHtml . toText $ zodiacSign  
+            toHtml . toText $ zodiacSign
       div_ [class_ "card-body"] $ do
         div_ [class_ "flex-container"] $ do
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Strengths"
             span_ [class_ "text-italic"] $ do
-              explanationAttribute zodiacSign "Strengths" 
+              explanationAttribute zodiacSign "Strengths"
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Weaknesses"
             span_ [class_ "text-italic"] $ do
-              explanationAttribute zodiacSign "Weaknesses"  
+              explanationAttribute zodiacSign "Weaknesses"
         div_ [class_ "flex-container"] $ do
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Element"
             span_ [class_ $ "text-large " <> (elementClass zodiacSign)] $ do
-              explanationAttribute zodiacSign "Element" 
+              explanationAttribute zodiacSign "Element"
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Quality"
             span_ [class_ "text-large"] $ do
-              explanationAttribute zodiacSign "Quality" 
+              explanationAttribute zodiacSign "Quality"
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Ruler"
             span_ [class_ "text-large"] $ do
-              explanationAttribute zodiacSign "Ruler" 
+              explanationAttribute zodiacSign "Ruler"
         div_ [class_ "flex-container"] $ do
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Related House"
             span_ [class_ "text-large"] $ do
-              explanationAttribute zodiacSign "Related house" 
+              explanationAttribute zodiacSign "Related house"
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Motto"
             span_ [class_ "text-large text-quoted"] $ do
-              explanationAttribute zodiacSign "Motto" 
-        div_ [class_ "divider divider-dark"] "" 
+              explanationAttribute zodiacSign "Motto"
+        div_ [class_ "divider divider-dark"] ""
         attributeTitle_ ("My Planets in " <> (toHtml . toText $ zodiacSign))
         let
           planets' = planetsInSign' zodiacSign
@@ -456,13 +456,13 @@ zodiacCards planetPositions houseCusps =
               table_ [class_ "table table-no-borders table-hover-dark text-center"] $ do
                 tbody_ [] $ do
                   forM_ planets' $ \p -> do
-                    planetDetails p 
+                    planetDetails p
         attributeTitle_ ("My Houses in " <> (toHtml . toText $ zodiacSign))
         let
           houses' = housesInSign' zodiacSign
           in do
             if null houses' then
-              p_ $ do 
+              p_ $ do
                 em_ "Your chart doesn't have any house cusps in this sign."
               else
                 table_ [class_ "table table-no-borders table-hover-dark text-center"] $ do
@@ -473,7 +473,7 @@ zodiacCards planetPositions houseCusps =
     planetsBySign' = planetsBySign planetPositions
     planetsInSign' = planetsInSign planetsBySign'
     housesBySign'  = housesBySign houseCusps
-    housesInSign'  = housesInSign housesBySign'                   
+    housesInSign'  = housesInSign housesBySign'
 
 houseCards :: [PlanetPosition] -> [House] -> Html ()
 houseCards planetPositions houseCusps =
@@ -482,25 +482,25 @@ houseCards planetPositions houseCusps =
       div_ [class_ "card-header"] $ do
         div_ [class_ "card-title"] $ do
           h4_ [id_ $ "house-" <> toText houseNumber] $ do
-            span_ [class_ "text-light"] $ do 
+            span_ [class_ "text-light"] $ do
               toHtml $ toText houseNumber
               ". "
-            explanationAttribute houseNumber "Alias"  
+            explanationAttribute houseNumber "Alias"
       div_ [class_ "card-body"] $ do
         p_ [class_ "text-italic"] $ do
-          explanationAttribute houseNumber "Keywords" 
+          explanationAttribute houseNumber "Keywords"
         p_ [] $ do
-          explain houseNumber 
+          explain houseNumber
         attributeTitle_ $ do
           explanationAttribute houseNumber "Quadrant"
-          " Quadrant" 
+          " Quadrant"
         p_ [] $ do
           explanationAttribute houseNumber "LatitudeHemisphere"
-          explanationAttribute houseNumber "LongitudeHemisphere"  
-        div_ [class_ "divider divider-dark"] "" 
+          explanationAttribute houseNumber "LongitudeHemisphere"
+        div_ [class_ "divider divider-dark"] ""
         attributeTitle_ ("My House " <> (toHtml . toText $ houseNumber) <> " Cusp")
         span_ [class_ "text-large"] $ do
-          zodiacLink' True huis 
+          zodiacLink' True huis
         attributeTitle_ ("My Planets in House " <> (toHtml . toText $ houseNumber))
         let
           planets' = planetsInHouse' huis
@@ -531,7 +531,7 @@ planetCards planetPositions houseCusps planetaryAspects angleAspects =
           div_ [class_ "card-subtitle"] $ do
             span_ [] "(retrograde)"
         else
-          mempty  
+          mempty
       div_ [class_ "card-body"] $ do
         p_ [class_ "text-italic"] $ do
           explanationAttribute (planetName p) "Keywords"
@@ -547,10 +547,10 @@ planetCards planetPositions houseCusps planetaryAspects angleAspects =
             div_ [class_ "flex-item"] $ do
               attributeTitle_ "Rulership"
               span_ [class_ "text-large"] $ do
-                explanationAttribute (planetName p) "Rulership" 
+                explanationAttribute (planetName p) "Rulership"
           else
             mempty
-        div_ [class_ "divider divider-dark"] "" 
+        div_ [class_ "divider divider-dark"] ""
         div_ [class_ "flex-container"] $ do
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "House"
@@ -559,7 +559,7 @@ planetCards planetPositions houseCusps planetaryAspects angleAspects =
           div_ [class_ "flex-item"] $ do
             attributeTitle_ "Position"
             span_ [class_ "text-large"] $ do
-              (zodiacLink' True) . planetLng $ p  
+              (zodiacLink' True) . planetLng $ p
         attributeTitle_ ("My Aspects to " <> (toHtml . label . planetName $ p))
         let
           aspects' = p & planetName & aspectsForPlanet' & catMaybes
@@ -569,7 +569,7 @@ planetCards planetPositions houseCusps planetaryAspects angleAspects =
               p_ $ do
                 em_ "This planet is unaspected. Note that not having any aspects is rare, which means this planet's sole influence can be quite significant."
             else
-              aspectsTable' (Just p) aspects' axes'   
+              aspectsTable' (Just p) aspects' axes'
   where
     housePosition'  = housePosition houseCusps
     aspectsForPlanet' p = map (findAspectBetweenPlanets planetaryAspects p) [Sun .. Chiron]
@@ -624,12 +624,12 @@ aspectsTable' aspectedPosition aspects' axes'= do
   table_ [class_ "table table-no-borders table-hover-dark text-center"] $ do
     tbody_ $ do
       forM_ aspects' $ \pa -> do
-        planetAspectDetails aspectedPosition pa  
+        planetAspectDetails aspectedPosition pa
       forM_ axes' $ \aa -> do
         axisAspectDetails aa
 
 aspectsTable :: [PlanetaryAspect] -> [AngleAspect] -> Html ()
-aspectsTable = aspectsTable' Nothing 
+aspectsTable = aspectsTable' Nothing
 
 planetAspectDetails :: (Maybe PlanetPosition) -> PlanetaryAspect  -> Html ()
 planetAspectDetails aspectedPosition a@HoroscopeAspect{..} = do
@@ -653,10 +653,10 @@ planetAspectDetails aspectedPosition a@HoroscopeAspect{..} = do
       "with orb "
       htmlDegrees' (True, True) (orb a)
   where
-    (first', second') = 
+    (first', second') =
       case aspectedPosition of
         Nothing -> (bodies & fst, bodies & snd)
-        Just aspected -> 
+        Just aspected ->
           if ((bodies & fst) == aspected) then
             (bodies & fst, bodies & snd)
           else

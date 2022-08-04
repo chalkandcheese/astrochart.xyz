@@ -1,7 +1,7 @@
 { pkgs ? import ./packages.nix { system = "x86_64-linux"; } }:
 
 let
-  bin = (pkgs.haskell.lib.justStaticExecutables (pkgs.haskell.lib.dontCheck pkgs.haskellPackages.freenatalchart));
+  bin = (pkgs.haskell.lib.justStaticExecutables (pkgs.haskell.lib.dontCheck pkgs.haskellPackages.astrochart));
   migrations = ../migrations;
   config = ../config;
   static = ../static;
@@ -10,10 +10,10 @@ in
 # This is the nix api to build images
 pkgs.dockerTools.buildImage {
   # our image name
-  name = "freenatalchart";
+  name = "astrochart";
   # our image tag
   tag = "latest";
-  
+
   # this is a list of the things we want to include
   # in the image. it's incredibly bare by default.
   contents = [
@@ -40,8 +40,8 @@ pkgs.dockerTools.buildImage {
 
   # This exposes the Dockerfile commands you might be familiar with
   config = {
-    Cmd = [ "${bin}/bin/freenatalchart-exe" ];
-    Env = [ 
+    Cmd = [ "${bin}/bin/astrochart-exe" ];
+    Env = [
       "DEPLOY_ENV=Production"
       "TIMEZONE_DATABASE_FILE=/config/timezone21.bin"
       "SE_EPHE_PATH=/config"

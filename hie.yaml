@@ -1,13 +1,13 @@
 cradle:
   cabal:
     - path: "src"
-      component: "lib:freenatalchart"
+      component: "lib:astrochart"
 
     - path: "app/Main.hs"
-      component: "freenatalchart:exe:freenatalchart-exe"
+      component: "astrochart:exe:astrochart-exe"
 
-    - path: "app/Paths_freenatalchart.hs"
-      component: "freenatalchart:exe:freenatalchart-exe"
+    - path: "app/Paths_fastrochart.hs"
+      component: "astrochart:exe:astrochart-exe"
 
     - path: "test"
-      component: "freenatalchart:test:freenatalchart-test"
+      component: "astrochart:test:astrochart-test"
