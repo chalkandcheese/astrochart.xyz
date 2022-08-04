@@ -59,13 +59,13 @@ instance Explicable HouseNumber  where
   and as such it is significant in understanding how an individual approaches life and
   is seen by others.
   |]
-  
+
 
   explain IV =
     markdownToHtml
       [i|
   The fourth house's starting point is the **Immum Coeli (IC)**, which is the lowest point in the sky
-  (the Sun's Nadir,) and as such it symbolizes the depths of one's connection to the soul. 
+  (the Sun's Nadir,) and as such it symbolizes the depths of one's connection to the soul.
   |]
 
 
@@ -209,7 +209,7 @@ instance Explicable ZodiacSignName  where
         ("Strengths", "brave, direct, fearless, independent, leader."),
         ("Weaknesses", "aggressive, self-centered, pushy, inconsistent.")
       ]
-  
+
   explanationAttributes Taurus =
     fromList
       [ ("Element", "Earth"),
@@ -291,7 +291,7 @@ instance Explicable ZodiacSignName  where
         ("Weaknesses", "lazy, restless, irresponsible, tactless")
       ]
   explanationAttributes Capricorn =
-    fromList 
+    fromList
       [ ("Element", "Earth"),
         ("Quality", "Cardinal"),
         ("Ruler", "Saturn"),
@@ -301,7 +301,7 @@ instance Explicable ZodiacSignName  where
         ("Weaknesses", "pessimistic, greedy, cynical, ruthless, rigid")
       ]
   explanationAttributes Aquarius =
-    fromList 
+    fromList
       [ ("Element", "Air"),
         ("Quality", "Fixed"),
         ("Ruler", "Uranus (traditionally, Saturn)"),
@@ -311,7 +311,7 @@ instance Explicable ZodiacSignName  where
         ("Weaknesses", "emotionally detached, impersonal, aloof")
       ]
   explanationAttributes Pisces =
-    fromList 
+    fromList
       [ ("Element", "Water"),
         ("Quality", "Mutable"),
         ("Ruler", "Neptune (traditionally, Jupiter)"),
@@ -323,79 +323,79 @@ instance Explicable ZodiacSignName  where
 
 instance Explicable Planet  where
   explanationAttributes Sun =
-    fromList 
+    fromList
       [ ("Group", "Personal"),
         ("Rulership", "Leo"),
         ("Keywords", "ego, basic personality, conscious, vitality, stamina, life energy, will, personal identity")
       ]
   explanationAttributes Moon =
-    fromList 
+    fromList
       [ ("Group", "Personal"),
         ("Rulership", "Cancer"),
         ("Keywords", "subconscious, emotions, instincts, habits, moods, maternity")
       ]
   explanationAttributes Mercury =
-    fromList 
+    fromList
       [ ("Group", "Personal"),
         ("Rulership", "Gemini, Virgo"),
         ("Keywords", "mind, communication, intellect, reason, language, intelligence")
       ]
   explanationAttributes Venus =
-    fromList 
+    fromList
       [ ("Group", "Personal"),
         ("Rulership", "Taurus, Libra"),
         ("Keywords", "attraction, love, beauty, harmony, artistic sensibility")
       ]
   explanationAttributes Mars =
-    fromList 
+    fromList
       [ ("Group", "Personal"),
         ("Rulership", "Aries"),
         ("Keywords", "aggression, drive, action, desire, competition, courage, passion, self-assertion")
       ]
   explanationAttributes Jupiter =
-    fromList 
+    fromList
       [ ("Group", "Social"),
         ("Rulership", "Sagittarius"),
         ("Keywords", "luck, growth, expansion, optimism, abundance, faith")
       ]
   explanationAttributes Saturn =
-    fromList 
+    fromList
       [ ("Group", "Social"),
         ("Rulership", "Capricorn"),
         ("Keywords", "structure, restriction, discipline, responsibility, obligation, concentration, limitation, material form")
       ]
   explanationAttributes Uranus =
-    fromList 
+    fromList
       [ ("Group", "Spiritual"),
         ("Rulership", "Aquarius"),
         ("Keywords", "eccentricity, rebellion, reformation, unpredictable change, liberation, disruption")
       ]
   explanationAttributes Neptune =
-    fromList 
+    fromList
       [ ("Group", "Spiritual"),
         ("Rulership", "Pisces"),
         ("Keywords", "dreams, intution, mysticism, imagination, delusion, disintegration of limits")
       ]
   explanationAttributes Pluto =
-    fromList 
+    fromList
       [ ("Group", "Spiritual"),
         ("Rulership", "Scorpio"),
         ("Keywords", "transformation, power, death, rebirth, evolution")
       ]
   explanationAttributes MeanNode =
-    fromList 
+    fromList
       [ ("Also known as", "Ascending Node, North Node"),
         ("Notes", "Some astrologers use the 'True Node': both values are calculated points in the Moon's orbit, and are only ever less than a degree apart."),
         ("Keywords", "future, life's direction, goals")
       ]
   explanationAttributes MeanApog =
-    fromList 
+    fromList
       [ ("Also known as", "Black Moon Lilith, Mean apogee"),
         ("Notes", "Some astrologers calculate Lilith as a focal point in the Moon's orbit, we use the 'mean' value of the moon's apogee: the point in the moon's orbit farthest away from Earth."),
         ("Keywords", "repressed self, anguish, resentment, rejection")
       ]
   explanationAttributes Chiron =
-    fromList 
+    fromList
       [ ("Keywords", "wounded self, healer, suffering, acceptance")
       ]
   explanationAttributes _ = empty
@@ -405,10 +405,10 @@ instance Explicable AspectName  where
   explain Conjunction =
     markdownToHtml
       [i|
-> A conjunction represents a close bond and interpenetration of both energies. 
-> The planets involved continually influence each other. 
+> A conjunction represents a close bond and interpenetration of both energies.
+> The planets involved continually influence each other.
 > If these planetary energies are similar - for example Moon/Venus or Sun/Mars - the conjunction's potential is increased.
-> In this case, the planets support each other and in combination often find it easier to assert themselves when facing others. 
+> In this case, the planets support each other and in combination often find it easier to assert themselves when facing others.
 > If two very different planets are close together - for example Mercury/Saturn or Mars/Neptune - the potential in each may end up being inhibited.
 
 (copied from [Astrowiki](https://www.astro.com/astrowiki/en/Conjunction))
@@ -461,7 +461,7 @@ instance Explicable AspectName  where
 >
 > An alternative view is that the sequence of signs in the zodiac is not arbitrary but contains a deep logic. The energy inherent in each sign of the zodiac is a prerequisite for the following one. For this reason, two planets connected by a semi-sextile can work constructively together while retaining their clearly defined roles. The planet in the preceding sign paves the way, as it were, for the following one. This understanding can help to create opportunities out of the difficulties associated with semi-sextiles.
 
-(copied from [Astrowiki](https://www.astro.com/astrowiki/en/Semi-Sextile))  
+(copied from [Astrowiki](https://www.astro.com/astrowiki/en/Semi-Sextile))
       |]
   explain Quincunx =
     markdownToHtml
@@ -551,13 +551,13 @@ generalHousesExplanation =
 In Astrology, the houses are 12 divisions of the heavens that represent the "earthly"
 facets of the individual or event for whom the chart has been drawn: they are the
 areas of life in which the innate forces of the **Planets**, and the characteristics
-of the **Zodiac Signs**, find manifestation in how an individual lives their life. 
+of the **Zodiac Signs**, find manifestation in how an individual lives their life.
 
 
 The beginning point of a house (known as the _cusp_,) may fall within a sign, and encompass
 one or more zodiac signs until the cusp of the next house. These contained signs indicate how
 the individual approaches the house's area of life. The planets contained in the house
-represent the forces that express themselves in that area of life (in our practice, we 
+represent the forces that express themselves in that area of life (in our practice, we
 see these as both _external_ and _internal_ forces, in the form of archetypes: universal symbols and
 myths that human beings manifest.)
 
@@ -579,15 +579,15 @@ generalSignsExplanation =
   markdownToHtml
     [i|
 In Astrology, the zodiac signs represent the "celestial" facets of the individual (or event)
-for whom the chart has been drawn: they are the personal characteristics or traits that, 
+for whom the chart has been drawn: they are the personal characteristics or traits that,
 combined with the houses and planets present in the sign, manifest in an individual's personality.
 
 Each Zodiac Sign has a _ruler_ (or two): a planet with which it has an affinity. If an individual's chart
 shows a sign's ruler located in that sign, it is said to be at home and the planet's characteristics/influences
-are said to be felt more strongly. 
+are said to be felt more strongly.
 
 Each Zodiac Sign also has an _affinity_ with a particular house; they share characteristics but the house's cusp
-_may not be_ in its "related" sign for a given chart. 
+_may not be_ in its "related" sign for a given chart.
 
 Traditionally, signs are assigned one of the four classical [**elements**](https://www.astro.com/astrowiki/en/Element) (Earth, Air, Fire, Water.) This is known as its
 _triplicity_. More recently, signs are related to a particular [**quality**](https://www.astro.com/astrowiki/en/Quality): this is known as its _quadruplicity_.
@@ -643,19 +643,19 @@ ecliptic (which is a circular representation of the heavens as seen from Earth,)
 can form angles with each other. In astrological practice, certain angles between planets or special points
 like the _Ascendant_ or _Midheaven_ symbolize an interaction between the archetypes these points represent;
 these angles are the **Aspects**. The angle may not be exact, for example, the Sun may be 92 degrees away from
-Mars, and an astrologer may choose to still call that a square (which is an angle of 90 degrees.) 
-The deviation from exact angle that's allowed to still recognize an aspect is called an _orb_. 
+Mars, and an astrologer may choose to still call that a square (which is an angle of 90 degrees.)
+The deviation from exact angle that's allowed to still recognize an aspect is called an _orb_.
 
-Different astrological practices have different orbs: sometimes bigger celestial bodies (as seen from Earth,) like the Sun or Moon 
+Different astrological practices have different orbs: sometimes bigger celestial bodies (as seen from Earth,) like the Sun or Moon
 are given larger orbs, or bodies that are close to each other are allowed wider orbs (like the Sun with Mercury;)
 while certain points that don't cast any light (like the Mean Node or the Ascendant) are not allowed any orbs.
-In our practice, [we use fairly generous orbs uniformly](#orbs-used), but we always show you the orb of any 
+In our practice, [we use fairly generous orbs uniformly](#orbs-used), but we always show you the orb of any
 aspects, as well as precise positions for all celestial bodies, so you can always choose to ignore aspects
 or add others if you believe they improve the psychological portrait of your chart!
 
 Aspects are usually divided between **Major** aspects, which are said to have the most impact on an individual,
 and **minor** aspects. Moreover, some aspects are said to be **harmonious** (or **synthetic**,) in which
-case the two bodies involved are said to work in concert, while other aspects are known as **disharmonious** 
+case the two bodies involved are said to work in concert, while other aspects are known as **disharmonious**
 (or, more accurately, **analytical/challenging**) in which the energies are at odds and may prove challenging
 -- but modern astrology sees this as an opportunity for growth and development, learning how to reconcile these
 opposing forces, as opposed to "bad" or "fateful".
@@ -668,7 +668,7 @@ generalTransitsExplanation =
 In Astrology, [Transits](https://www.astro.com/astrowiki/en/Transit)
 are aspects between the position of planets at a given time, and the position of planets
 or axes in a natal chart. When a transiting planet forms an _exact_ aspect, the aspect is considered
-**triggered**, or activated. 
+**triggered**, or activated.
 
 What transits are relevant is definitely an art, and up to an astrologer's criteria: in our aspects table,
 we show all aspects formed by transiting planets, using the same orbs as natal charts,
@@ -676,7 +676,7 @@ but only consider a transit to be **active** when it is _very_ close (less than 
 from exactitude at the moment of querying. This is why the list of _active transit aspects_ appears much
 smaller than all transit aspects shown in the summary table. We only draw active aspects, too.
 
-The _period of activity_ is also a bit of an art: 
+The _period of activity_ is also a bit of an art:
 
 * There's an <strong class="text-fire">Applying</strong> phase: when a transiting planet is _approaching_ the aspect's point of exactitude,
   which a lot of astrologers consider to be more important, since the energy of the aspect
@@ -691,12 +691,10 @@ We currently take a naïve approach:
 we simply consider a transit to begin its activity when it's at most one degree away from becoming, or
 having become, exact, in the 24 hour period around the moment of query. To aid your own interpretation,
 we show the letter `a` in the summary table when an aspect is in the applicative phase (about to become
-exact), and an `s` when it's separating (moving away.) 
+exact), and an `s` when it's separating (moving away.)
 
 Given all of the above, the [tables of positions and aspect summary](#analyze) are the best starting point for your own
 interpretation: we take a rather cautious approach to what aspects we consider active, but you can
 draw your own conclusions based on the raw data and your personal situation!
 
-If you have any suggestions about how we calculate or present transiting aspects,
-please [leave us a note](https://github.com/lfborjas/freenatalchart.xyz/issues/new?assignees=&labels=transits&template=transit-or-aspect-suggestion.md&title=Transit+or+Aspect+Suggestion).
     |]

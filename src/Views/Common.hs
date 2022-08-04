@@ -21,7 +21,7 @@ fixtureRenderContext :: RenderContext
 fixtureRenderContext = RenderContext "../../static/"
 
 assetRef :: HasStaticRoot ctx => ctx -> FilePath -> Attribute
-assetRef renderCtx = 
+assetRef renderCtx =
     href_ . pack . (mappend assetPath)
     where
         assetPath = renderCtx ^. staticRootL
@@ -45,7 +45,7 @@ favicon renderCtx = do
     link_ [rel_ "apple-touch-icon", sizes_ "180x180", assetRef' "apple-touch-icon.png"]
     link_ [rel_ "icon", type_ "image/png", sizes_ "32x32", assetRef' "favicon-32x32.png"]
     link_ [rel_ "icon", type_ "image/png", sizes_ "16x16", assetRef' "favicon-16x16.png"]
-    link_ [rel_ "manifest", assetRef' "site.webmanifest"] 
+    link_ [rel_ "manifest", assetRef' "site.webmanifest"]
     where
         assetRef' = assetRef renderCtx
 
@@ -68,12 +68,11 @@ broughtToYou = do
 otherLinks :: Html ()
 otherLinks = do
     a_ [href_ "/about", class_ "btn btn-link text-white", title_ "tl;dr: your data is private, our source is free."] "About"
-    a_ [href_ "https://blog.freenatalchart.xyz/", class_ "btn btn-link text-white", title_ "Announcements, technical writeups, notes on learning about astrology."] "Blog"
 
 sourceCode :: Html ()
-sourceCode = 
-    a_ 
-        [ href_ "https://github.com/lfborjas/freenatalchart.xyz"
+sourceCode =
+    a_
+        [ href_ "https://github.com/tboye/astrochart.xyz"
         , title_ "Made in Haskell with love and a bit of insanity."
         ,  class_ "btn btn-link text-white"] "Source Code"
 
@@ -82,8 +81,8 @@ footerNav :: Html ()
 footerNav =
     footer_ [class_ "navbar navbar-border-top"] $ do
         section_ [class_ "navbar-section"] $ do
-            otherLinks 
+            otherLinks
         section_ [class_ "navbar-center"] $ do
             broughtToYou
         section_ [class_ "navbar-section"] $ do
-            sourceCode 
+            sourceCode
