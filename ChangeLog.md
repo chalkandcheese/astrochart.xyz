@@ -1,3 +1,3 @@
-# Changelog for freenatalchart.xyz
+# Changelog for astrochart.xyz
 
 ## Unreleased changes

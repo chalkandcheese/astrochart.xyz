@@ -24,7 +24,7 @@ render ctx maybeForm = do
             div_ [id_ "main", class_ "container grid-sm"] $ do
                 header_ [class_ "navbar bg-dark navbar-fixed navbar-fixed-top"] $ do
                     section_ [class_ "navbar-section navbar-brand hide-sm"] $ do
-                        a_ [href_ "/", class_ "brand-text"] "FreeNatalChart.xyz"
+                        a_ [href_ "/", class_ "brand-text"] "astrochart.xyz"
                     section_ [class_ "navbar-section navbar-center"] ""
                     section_ [class_ "navbar-section"] $ do
                         a_ [id_ "chart-of-the-moment", class_ "text-white d-invisible", href_ ""] "Chart of the Moment"
@@ -35,7 +35,7 @@ render ctx maybeForm = do
 
                 div_ [id_ "err", class_ "my-2 toast toast-error d-none"] $ do
                     p_ [id_ "errMsg"] ""
-                    a_ [href_ "https://github.com/lfborjas/freenatalchart.xyz/issues/new/choose"] $ do
+                    a_ [href_ "https://github.com/chalkandcheese/astrochart.xyz/issues/new/choose"] $ do
                         "Report an issue"
 
                 form_ [action_ "/full-chart", method_ "get", style_ "min-height: 50vh;"] $ do

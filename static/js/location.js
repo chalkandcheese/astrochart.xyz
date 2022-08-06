@@ -91,14 +91,14 @@ function initChartOfTheMomentLink(){
   let chartOfTheMomentLink = document.getElementById('chart-of-the-moment');
   let dayParts = currentDateComponents();
 
-  chartOfTheMomentLink.textContent = "Chart of the moment in NYC";
-  chartOfTheMomentLink.href = "/full-chart?location=New+York&month=" + dayParts.month
+  chartOfTheMomentLink.textContent = "Chart of the moment in Amsterdam";
+  chartOfTheMomentLink.href = "/full-chart?location=Amsterdam&month=" + dayParts.month
     + "&day=" + dayParts.day
     + "&year=" + dayParts.year
     + "&hour=" + dayParts.hour
     + "&minute=" + dayParts.minute
     + "&day-part=" + dayParts.partOfDay
-    + "&lat=40.6815&lng=-73.8365";
+    + "&lat=52.3676&lng=4.9041";
   
   navigator.geolocation.getCurrentPosition(
     function (pos) {
